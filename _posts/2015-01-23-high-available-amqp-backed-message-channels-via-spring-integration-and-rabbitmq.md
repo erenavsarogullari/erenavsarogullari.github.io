@@ -204,7 +204,7 @@ public interface OrderGateway {
 }
 ```
 
-STEP 7 : OrderSplitter
+**STEP 7 : OrderSplitter**
 
 OrderSplitter listens inputChannel and breaks incoming Order List into Order messages. Order messages are sent to AMQP backed processChannel.
 
@@ -232,7 +232,7 @@ public class OrderSplitter {
 }
 ```
 
-STEP 8 : ProcessService
+**STEP 8 : ProcessService**
 
 Generic Process Service Interface exposes process service functionality to messaging system.
 
@@ -252,7 +252,7 @@ public interface ProcessService<T> {
 }
 ```
 
-STEP 9 : OrderProcessService
+**STEP 9 : OrderProcessService**
 
 Order Process Service Activator listens AMQP backed processChannel and logs incoming Order messages. Sleep is added to fill ha.rabbit.channel RabbitMQ queue.
 ```scala
