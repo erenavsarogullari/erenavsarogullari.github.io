@@ -147,7 +147,7 @@ Spring Integration Context is created as follows. Order Lists are sent to Order 
 
 rabbitmq.properties is created as follows. If first RabbitMQ server is shut down accidentally, Second RabbitMQ will continue to listen the Order messages.
 
-```scala
+```
 rabbitmq.addresses=localhost:5672,localhost:5673
 rabbitmq.username=guest
 rabbitmq.password=guest
@@ -381,7 +381,7 @@ public class Application {
 
 First RabbitMQ Server’ s sample bash script is as follows. Also please have a look RabbitMQ Cluster documentation for other configuration steps.
 
-```scala
+```
 #!/bin/bash
 echo "*** First RabbitMQ Server is setting up ***"
 
@@ -403,7 +403,7 @@ echo "*** First RabbitMQ Server' s status : ***"
 
 Second RabbitMQ Server’ s sample bash script is as follows :
 
-```scala
+```
 #!/bin/bash
 echo "*** Second RabbitMQ Server is setting up ***"
 
@@ -479,7 +479,7 @@ The following console output logs will be seen as well :
 
 First Messaging Node Console :
 
-```scala
+```
 ...
 
 22:32:51.838 [SimpleAsyncTaskExecutor-1] DEBUG c.o.p.s.OrderProcessService - Node 1 - Received Message : Order [id=260, name=Sample_Order_260]
@@ -492,7 +492,7 @@ After Message id : 264 is delivered to First Messaging Node, it and First Rabbit
 
 Second Messaging Node Console :
 
-```scala
+```
 ...
 
 22:32:54.211 [SimpleAsyncTaskExecutor-1] DEBUG c.o.p.s.OrderProcessService - Node 2 - Received Message : Order [id=262, name=Sample_Order_262]
