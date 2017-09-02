@@ -25,13 +25,13 @@ Let us have a look sample order messaging implementation.</p>
 
 Project Hierarchy is as follows:
 
-<img src="https://erenavsarogullari.github.io/img/spring_integration_amqp_support.png" style="width:304px;height:228px;">
+![_config.yml]({{ site.baseurl }}/images/spring_integration_amqp_support.png)
 
 **STEP 1 : Dependencies**
 
 Spring and Spring Integration Frameworks’ Dependencies are as follows :
 
-```ruby
+```xml
 <properties>
     <spring.version>4.1.4.RELEASE</spring.version>
     <spring.integration.version>4.1.2.RELEASE</spring.integration.version>
@@ -97,7 +97,7 @@ Second RabbitMQ Server’ s rabbitmq.config file :
 
 Spring Integration Context is created as follows. Order Lists are sent to Order Splitter’ s input channel via Order Gateway. Order Splitter splits order list to order messages and sends them to Order Process Service Activator. processChannel is a point-to-point AMQP backed message channel. It creates a ha.rabbit.channel queue managed by RabbitMQ cluster and sends order messages to ha.rabbit.channel RabbitMQ queue for high availability.
 
-```scala
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -156,10 +156,6 @@ rabbitmq.password=guest
 **STEP 5 : Order Model**
 
 Order Bean models order messages.
-
-import java.io.Serializable;
-
-public class Order implements Serializable {
 
 ```scala
 import java.io.Serializable;
@@ -453,31 +449,31 @@ Order Messages’ operational results are as follows :
 
 RabbitMQ Cluster Overview is as follows :
 
-<img src="https://erenavsarogullari.github.io/img/rabbitmq_cluster_overview1.png" style="width:304px;height:228px;">
+![_config.yml]({{ site.baseurl }}/images/rabbitmq_cluster_overview1.png)
 
 3- First RabbitMQ Server‘ s high available(HA) policy is set.
 4- First messaging Node is started. It creates order messages and processes.
 
 When First messaging Node is started, A ha.rabbit.channel RabbitMQ queue is created automatically by Spring Integration context as follows :
 
-<img src="https://erenavsarogullari.github.io/img/ha_rabbit_channel.png" style="width:304px;height:228px;">
+![_config.yml]({{ site.baseurl }}/images/ha_rabbit_channel.png)
 
 5- Second messaging Node is started. It does not create Order messages so just processes.
 6- Order Lists start to be processed.
 
 After First and Second Messaging Nodes connect to RabbitMQ Cluster, ha.rabbit.channel Queue details are as follows :
 
-<img src="https://erenavsarogullari.github.io/img/ha_rabbit_channel_details1.png" style="width:304px;height:228px;">
+![_config.yml]({{ site.baseurl }}/images/ha_rabbit_channel_details1.png)
 
 ha.rabbit.channel Queue on Second RabbitMQ Server :
 
-<img src="https://erenavsarogullari.github.io/img/ha_rabbit_channel_details_21.png" style="width:304px;height:228px;">
+![_config.yml]({{ site.baseurl }}/images/ha_rabbit_channel_details_21.png)
 
 7- First Messaging Node shuts down.
 8- First RabbitMQ Server shuts down and is left from cluster.
 9- Second Messaging Node and Second RabbitMQ Server process incoming Order messages for high availability so there is no service interruption. Second RabbitMQ Node’ s Screenshot is as follows :
 
-<img src="https://erenavsarogullari.github.io/img/ha_rabbit_channel_details_2_after_first_node_is_down1.png" style="width:304px;height:228px;">
+![_config.yml]({{ site.baseurl }}/images/ha_rabbit_channel_details_2_after_first_node_is_down1.png)
 
 The following console output logs will be seen as well :
 
