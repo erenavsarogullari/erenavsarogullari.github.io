@@ -157,7 +157,7 @@ rabbitmq.password=guest
 
 Order Bean models order messages.
 
-```scala
+```java
 import java.io.Serializable;
 
 public class Order implements Serializable {
@@ -185,7 +185,7 @@ public class Order implements Serializable {
 
 OrderGateway Interface provides an application access to the Order messaging system. Its default request channel is inputChannel.
 
-```scala
+```java
 import java.util.List;
 
 import org.springframework.messaging.Message;
@@ -208,7 +208,7 @@ public interface OrderGateway {
 
 OrderSplitter listens inputChannel and breaks incoming Order List into Order messages. Order messages are sent to AMQP backed processChannel.
 
-```scala
+```java
 import java.util.List;
 
 import org.springframework.messaging.Message;
@@ -236,7 +236,7 @@ public class OrderSplitter {
 
 Generic Process Service Interface exposes process service functionality to messaging system.
 
-```scala
+```java
 import org.springframework.messaging.Message;
 
 
@@ -255,7 +255,7 @@ public interface ProcessService<T> {
 **STEP 9 : OrderProcessService**
 
 Order Process Service Activator listens AMQP backed processChannel and logs incoming Order messages. Sleep is added to fill ha.rabbit.channel RabbitMQ queue.
-```scala
+```java
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.Message;
@@ -289,7 +289,7 @@ Application Class runs the application by initializing application context and s
 
 First Messaging Node’ s Application Class :
 
-```scala
+```java
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -358,7 +358,7 @@ public class Application {
 
 Second Messaging Node’ s Application Class :
 
-```scala
+```java
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
