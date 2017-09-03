@@ -37,9 +37,13 @@ Message message = MessageBuilder.withPayload("Message Payload")
 **Channel Adapter :** A Channel Adapter is an endpoint that connects a Message Channel to external system. Channel Adapters may be either inbound or outbound. An inbound Channel Adapter endpoint connects a external system to a MessageChannel. An outbound Channel Adapter endpoint connects a MessageChannel to a external system.
 **Messaging Gateway :** A gateway is an entry point for the messaging system and hides the messaging API from external system. It is bidirectional by covering request and reply channels.
 
-<p>Also Spring Integration provides various Channel Adapters and Messaging Gateways (for AMQP, File, Redis, Gemfire, Http, Jdbc, JPA, JMS, RMI, Stream etc..) to support Message-based communication with external systems. Please visit Spring Integration Reference documentation for the detailed information.
+<p>
+Also Spring Integration provides various Channel Adapters and Messaging Gateways (for AMQP, File, Redis, Gemfire, Http, Jdbc, JPA, JMS, RMI, Stream etc..) to support Message-based communication with external systems. Please visit Spring Integration Reference documentation for the detailed information.
+</p>
 
-<p>The following sample Cargo messaging implementation shows basic message endpoints’ behaviours for understanding easily. Cargo messaging system listens cargo messages from external system by using a CargoGateway Interface. Received cargo messages are processed by using CargoSplitter, CargoFilter, CargoRouter, CargoTransformer MessageEndpoints. After then, processed successful domestic and international cargo messages are sent to CargoServiceActivator.
+<p>
+The following sample Cargo messaging implementation shows basic message endpoints’ behaviours for understanding easily. Cargo messaging system listens cargo messages from external system by using a CargoGateway Interface. Received cargo messages are processed by using CargoSplitter, CargoFilter, CargoRouter, CargoTransformer MessageEndpoints. After then, processed successful domestic and international cargo messages are sent to CargoServiceActivator.
+</p>
 
 <p>Cargo Messaging System’ s Spring Integration Flow is as follows :</p>
 
