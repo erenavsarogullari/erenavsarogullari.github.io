@@ -47,19 +47,21 @@ Message message = MessageBuilder.withPayload("Message Payload")
 
 <p>Let us take a look sample cargo messaging implementation.</p>
 
-<p>
+
 **Used Technologies**
+
 * JDK 1.8.0_25
 * Spring 4.1.2
 * Spring Integration 4.1.0
 * Maven 3.2.2
 * Ubuntu 14.04
-</p>
+
 <p>Project Hierarchy is as follows :</p>
 
 ![_config.yml]({{ site.baseurl }}/images/otv_si3.jpeg)
 
 **STEP 1 : Dependencies**
+
 Dependencies are added to Maven pom.xml.
 ```xml
 <properties>
@@ -85,7 +87,9 @@ Dependencies are added to Maven pom.xml.
 ```
 
 **STEP 2 : Cargo Builder**
+
 CargoBuilder is created to build Cargo requests.
+
 ```java
 public class Cargo {
 
@@ -173,7 +177,9 @@ public class Cargo {
 ```
 
 **STEP 3 : Cargo Message**
+
 CargoMessage is the parent class of Domestic and International Cargo Messages.
+
 ```java
 public class CargoMessage {
 
@@ -195,7 +201,9 @@ public class CargoMessage {
 ```
 
 **STEP 4 : Domestic Cargo Message**
+
 DomesticCargoMessage Class models domestic cargo messages.
+
 ```java
 public class DomesticCargoMessage extends CargoMessage {
     
@@ -237,6 +245,7 @@ public class DomesticCargoMessage extends CargoMessage {
 ```
 
 **STEP 5 : International Cargo Message**
+
 InternationalCargoMessage Class models international cargo messages.
 
 ```java
@@ -266,6 +275,7 @@ public class InternationalCargoMessage extends CargoMessage {
 ```
 
 **STEP 6 : Application Configuration**
+
 AppConfiguration is configuration provider class for Spring Container. It creates Message Channels and registers to Spring BeanFactory. Also **@EnableIntegration** enables imported spring integration configuration and **@IntegrationComponentScan** scans Spring Integration specific components. Both of them came with Spring Integration 4.0.
 
 ```java
@@ -347,6 +357,7 @@ public class AppConfiguration {
 ```
 
 **STEP 7 : Messaging Gateway**
+
 CargoGateway Interface exposes domain-specific method to the application. In other words, it provides an application access to the messaging system. Also **@MessagingGateway** came with Spring Integration 4.0 and simplifies gateway creation in messaging system. Its default request channel is **cargoGWDefaultRequestChannel**.
 
 ```java
@@ -374,6 +385,7 @@ public interface ICargoGateway {
 ```
 
 **STEP 8 : Messaging Splitter**
+
 CargoSplitter listens **cargoGWDefaultRequestChannel** channel and breaks incoming Cargo List into Cargo messages. Cargo messages are sent to **cargoSplitterOutputChannel**.
 
 ```java
@@ -403,6 +415,7 @@ public class CargoSplitter {
 ```
 
 **STEP 9 : Messaging Filter**
+
 CargoFilter determines whether the message should be passed to the message channel. It listens **cargoSplitterOutputChannel** channel and filters cargo messages exceeding weight limit. If Cargo message is lower than weight limit, it is sent to **cargoFilterOutputChannel** channel. If Cargo message is higher than weight limit, it is sent to **cargoFilterDiscardChannel** channel.
 
 ```java
@@ -431,6 +444,7 @@ public class CargoFilter {
 ```
 
 **STEP 10 : Discarded Cargo Message Listener**
+
 DiscardedCargoMessageListener listens cargoFilterDiscard Channel and handles Cargo messages discarded by CargoFilter.
 
 ```java
@@ -463,6 +477,7 @@ public class DiscardedCargoMessageListener {
 ```
 
 **STEP 11 : Messaging Router**
+
 CargoRouter determines what channel(s) should receive the message next if it is available. It listens cargoFilterOutputChannel channel and returns related channel name in the light of cargo shipping type. In other words, it routes incoming cargo messages to domestic(cargoRouterDomesticOutputChannel) or international(cargoRouterInternationalOutputChannel) cargo channels. Also if shipping type is not set, nullChannel is returned. nullChannel is a dummy message channel to be used mainly for testing and debugging. It does not send the message from sender to receiver but its send method always returns true and receive method returns null value.
 
 ```java
@@ -496,6 +511,7 @@ public class CargoRouter {
 ```
 
 **STEP 12 : Messaging Transformer**
+
 CargoTransformer listens cargoRouterDomesticOutputChannel & cargoRouterInternationalOutputChannel and transforms incoming Cargo requests to Domestic and International Cargo messages. After then, it sends them to cargoTransformerOutputChannel channel.
 
 ```java
@@ -560,6 +576,7 @@ public class CargoTransformer {
 ```
 
 **STEP 13 : Messaging Service Activator**
+
 CargoServiceActivator is a generic endpoint for connecting service instance to the messaging system. It listens cargoTransformerOutputChannel channel and gets processed domestic and international cargo messages and logs.
 
 ```java
@@ -592,6 +609,7 @@ public class CargoServiceActivator {
 ```
 
 **STEP 14 : Application**
+
 Application Class is created to run the application. It initializes application context and sends cargo requests to messaging system.
 
 ```java
@@ -667,6 +685,7 @@ public class Application {
 ```
 
 **STEP 15 : Build Project**
+
 <p>
 Cargo requests’ operational results are as follows :
 Cargo 1 : is sent to service activator successfully.
@@ -691,9 +710,11 @@ After the project is built and run, the following console output logs will be se
 2014-12-09 23:43:51 [main] DEBUG c.o.i.CargoServiceActivator - Message in Batch[3] is received with payload : InternationalCargoMessage [cargo=Cargo [trackingId=9, receiverName=Receiver_Name9, deliveryAddress=Address9, weight=4.75, description=Document, shippingType=INTERNATIONAL, deliveryDayCommitment=1, region=0], deliveryOption=NEXT_FLIGHT]
 
 **Source Code**
+
 Source Code is available on Github
 
 **References**
+
 * Enterprise Integration Patterns
 * Spring Integration Reference Manual
 * Spring Integration 4.1.0.RELEASE API
