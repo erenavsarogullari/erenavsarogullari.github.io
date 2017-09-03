@@ -693,8 +693,9 @@ public class Application {
 
 **STEP 15 : Build Project**
 
-<p>
 Cargo requests’ operational results are as follows :
+
+```
 Cargo 1 : is sent to service activator successfully.
 Cargo 2 : is filtered due to weight limit.
 Cargo 3 : is sent to service activator successfully.
@@ -704,12 +705,11 @@ Cargo 6 : is sent to service activator successfully.
 Cargo 7 : is not processed due to no shipping type.
 Cargo 8 : is sent to service activator successfully.
 Cargo 9 : is sent to service activator successfully.
-</p>
+```
 
-<p>
 After the project is built and run, the following console output logs will be seen :
-</p>
 
+```
 2014-12-09 23:43:51 [main] DEBUG c.o.i.CargoServiceActivator - Message in Batch[1] is received with payload : DomesticCargoMessage [cargo=Cargo [trackingId=1, receiverName=Receiver_Name1, deliveryAddress=Address1, weight=0.5, description=Radio, shippingType=DOMESTIC, deliveryDayCommitment=0, region=1], region=NORTH]
 2014-12-09 23:43:51 [main] DEBUG c.o.i.DiscardedCargoMessageListener - Message in Batch[1] is received with Discarded payload : Cargo [trackingId=2, receiverName=Receiver_Name2, deliveryAddress=Address2, weight=2000.0, description=Furniture, shippingType=INTERNATIONAL, deliveryDayCommitment=3, region=0]
 2014-12-09 23:43:51 [main] DEBUG c.o.i.CargoServiceActivator - Message in Batch[1] is received with payload : InternationalCargoMessage [cargo=Cargo [trackingId=3, receiverName=Receiver_Name3, deliveryAddress=Address3, weight=5.0, description=TV, shippingType=INTERNATIONAL, deliveryDayCommitment=2, region=0], deliveryOption=PRIORITY]
@@ -717,6 +717,7 @@ After the project is built and run, the following console output logs will be se
 2014-12-09 23:43:51 [main] DEBUG c.o.i.CargoServiceActivator - Message in Batch[2] is received with payload : DomesticCargoMessage [cargo=Cargo [trackingId=6, receiverName=Receiver_Name6, deliveryAddress=Address6, weight=20.0, description=Table, shippingType=DOMESTIC, deliveryDayCommitment=0, region=3], region=EAST]
 2014-12-09 23:43:51 [main] DEBUG c.o.i.CargoServiceActivator - Message in Batch[3] is received with payload : DomesticCargoMessage [cargo=Cargo [trackingId=8, receiverName=Receiver_Name8, deliveryAddress=Address8, weight=200.0, description=Washing Machine, shippingType=DOMESTIC, deliveryDayCommitment=0, region=2], region=SOUTH]
 2014-12-09 23:43:51 [main] DEBUG c.o.i.CargoServiceActivator - Message in Batch[3] is received with payload : InternationalCargoMessage [cargo=Cargo [trackingId=9, receiverName=Receiver_Name9, deliveryAddress=Address9, weight=4.75, description=Document, shippingType=INTERNATIONAL, deliveryDayCommitment=1, region=0], deliveryOption=NEXT_FLIGHT]
+```
 
 **Source Code**
 
