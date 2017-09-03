@@ -41,20 +41,21 @@ Message message = MessageBuilder.withPayload("Message Payload")
 
 <p>The following sample Cargo messaging implementation shows basic message endpoints’ behaviours for understanding easily. Cargo messaging system listens cargo messages from external system by using a CargoGateway Interface. Received cargo messages are processed by using CargoSplitter, CargoFilter, CargoRouter, CargoTransformer MessageEndpoints. After then, processed successful domestic and international cargo messages are sent to CargoServiceActivator.
 
-<p>Cargo Messaging System’ s Spring Integration Flow is as follows :
+<p>Cargo Messaging System’ s Spring Integration Flow is as follows :</p>
 
 ![_config.yml]({{ site.baseurl }}/images/otv_si.jpeg)
 
-Let us take a look sample cargo messaging implementation.
+<p>Let us take a look sample cargo messaging implementation.</p>
 
+<p>
 **Used Technologies**
 * JDK 1.8.0_25
 * Spring 4.1.2
 * Spring Integration 4.1.0
 * Maven 3.2.2
 * Ubuntu 14.04
-
-Project Hierarchy is as follows :
+</p>
+<p>Project Hierarchy is as follows :</p>
 
 ![_config.yml]({{ site.baseurl }}/images/otv_si3.jpeg)
 
@@ -169,7 +170,7 @@ public class Cargo {
         }
         
     }
-   ```
+```
 
 **STEP 3 : Cargo Message**
 CargoMessage is the parent class of Domestic and International Cargo Messages.
