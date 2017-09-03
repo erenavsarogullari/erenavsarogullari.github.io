@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "Message Processing with Spring Integration"
+category: Dev
+tags: [spring integration, Enterprise Integration Patterns, Spring]
 date: 2014-12-18
 ---
 

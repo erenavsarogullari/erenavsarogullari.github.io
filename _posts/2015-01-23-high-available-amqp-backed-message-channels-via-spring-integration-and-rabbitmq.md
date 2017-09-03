@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "High Available AMQP Backed Message Channels via Spring Integration and RabbitMQ"
+category: Dev
+tags: [spring integration, enterprise integration patterns, spring, rabbitmq, amqp]
 date: 2015-01-23
 ---
 
