@@ -255,6 +255,7 @@ public interface ProcessService<T> {
 **STEP 9 : OrderProcessService**
 
 Order Process Service Activator listens AMQP backed processChannel and logs incoming Order messages. Sleep is added to fill ha.rabbit.channel RabbitMQ queue.
+
 ```java
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
