@@ -7,7 +7,7 @@ date: 2014-12-18
 Spring Integration provides an extension of the Spring framework to support the well-known Enterprise Integration Patterns. It enables lightweight messaging within Spring-based applications and supports integration with external systems. One of the most important goals of Spring Integration is to provide a simple model for building maintainable and testable enterprise integration solutions.
 
 **Main Components**
-Message : It is a generic wrapper for any Java object combined with metadata used by the framework while handling that object. It consists of a payload and header(s). Message payload can be any Java Object and Message header is a String/Object Map covering header name and value. MessageBuilder is used to create messages covering payload and headers as follows :
+<p>**Message** : It is a generic wrapper for any Java object combined with metadata used by the framework while handling that object. It consists of a payload and header(s). Message payload can be any Java Object and Message header is a String/Object Map covering header name and value. MessageBuilder is used to create messages covering payload and headers as follows :
 
 ```java
 import org.springframework.messaging.Message;
