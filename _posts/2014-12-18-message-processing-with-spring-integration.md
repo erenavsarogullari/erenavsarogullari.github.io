@@ -67,6 +67,7 @@ The following sample Cargo messaging implementation shows basic message endpoint
 **STEP 1 : Dependencies**
 
 Dependencies are added to Maven pom.xml.
+
 ```xml
 <properties>
        <spring.version>4.1.2.RELEASE</spring.version>
