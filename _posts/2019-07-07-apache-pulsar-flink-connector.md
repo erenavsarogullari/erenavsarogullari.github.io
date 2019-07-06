@@ -45,11 +45,12 @@ date: 2019-07-07
 
 Lets have a look example:
 
-In this example Scala has been used. However, both Java and Scala examples can also be found under Apache Pulsar Repo as follows: \
-[Java Examples](https://github.com/apache/pulsar/tree/master/examples/flink/src/main/java/org/apache/flink/batch/connectors/pulsar/example/) \
+<p>In this example Scala has been used. However, both Java and Scala examples can also be found under Apache Pulsar Repo as follows:</p>
+
+[Java Examples](https://github.com/apache/pulsar/tree/master/examples/flink/src/main/java/org/apache/flink/batch/connectors/pulsar/example/)
 [Scala Examples](https://github.com/apache/pulsar/tree/master/examples/flink/src/main/scala/org/apache/flink/batch/connectors/pulsar/example/)
 
-In this example project, we will be creating Flink NasaMission Dataset and writing each row to Pulsar as separated message in Csv format. Lets start:
+<p>In this example project, we will be creating Flink NasaMission Dataset and writing each row to Pulsar as separated message in Csv format. Lets start:</p>
 
 ##### Setup:
 1. JDK v1.8
@@ -57,7 +58,7 @@ In this example project, we will be creating Flink NasaMission Dataset and writi
 1. Apache Flink: v1.8
 1. Apache Pulsar: v2.3.2
 
-1- Apache Pulsar can be downloaded via https://pulsar.apache.org/en/download/
+1- Apache Pulsar can be downloaded at [here](https://pulsar.apache.org/en/download/)
 ```shell
 $ tar xvfz apache-pulsar-2.3.2-bin.tar.gz
 $ cd apache-pulsar-2.3.2
