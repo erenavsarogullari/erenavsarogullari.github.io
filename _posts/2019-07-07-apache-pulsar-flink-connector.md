@@ -26,7 +26,7 @@
 1. `Seamless scalability out to over a million topics`: 
 
 ### Apache Pulsar - Flink Connector
-<p>Apache Pulsar - Flink Connector brings Flink DataSet and DataStream API support to Apache Pulsar for batch and streaming use-cases. With this connector, Flink data batches and streams can be written to user-defined Pulsar topic. This article mostly focuses Pulsar-Flink DataSet API Support.
+<p>Apache Pulsar - Flink Connector brings Flink DataSet and DataStream API support to Apache Pulsar for batch and streaming use-cases. With this connector, Flink data batches and streams can be written to user-defined Pulsar topic. This article mostly focuses Pulsar-Flink DataSet API Support.</p>
 
 <p>Pulsar - Flink Batch API currently supports the following output formats:</p>
 
