@@ -13,10 +13,10 @@ date: 2019-07-07
 
 <p>Flink’s some of the key features are as follows:</p>
 
-1. **Stateful Stream Processing:** \
-1. **Complex Event Processing:** \
-1. **Batch Processing:** \
-1. **ML:** \
+1. **Stateful Stream Processing:**
+1. **Complex Event Processing:**
+1. **Batch Processing:**
+1. **ML:**
 1. **Graph Processing:**
 
 ### Apache Pulsar
@@ -24,13 +24,13 @@ date: 2019-07-07
 
 <p>Pulsar’s some of the key features are as follows:</p>
 
-1. **Multi Language Support:** Currently, simple client APIs support such as Java, Python, C++ \
-1. **Multi Tenancy:** Multiple services can be supported by same Pulsar cluster through separated authentication and authorization isolation. \
-1. **Streaming and Queueing Support:** Pulsar supports traditional Queueuing and Streaming use-case by supporting different subscription mode: such as exclusive, shared or failover \
-1. **Pulsar Functions:** Serverless based computing framework by providing stream-native data processing. \
-1. **Pulsar I/O:** Connector framework built on top of Pulsar Functions by moving data in and out through ecosystem. \
-1. **Geo Replication:** This feature provides sync/async message replication between clusters located in different geo locations. \
-1. **Persistent and Isolated Message Storage:** Pulsar decouples serving and storage tiers. Pulsar uses Apache Bookkeeper as message-store \
+1. **Multi Language Support:** Currently, simple client APIs support such as Java, Python, C++
+1. **Multi Tenancy:** Multiple services can be supported by same Pulsar cluster through separated authentication and authorization isolation.
+1. **Streaming and Queueing Support:** Pulsar supports traditional Queueuing and Streaming use-case by supporting different subscription mode: such as exclusive, shared or failover
+1. **Pulsar Functions:** Serverless based computing framework by providing stream-native data processing.
+1. **Pulsar I/O:** Connector framework built on top of Pulsar Functions by moving data in and out through ecosystem.
+1. **Geo Replication:** This feature provides sync/async message replication between clusters located in different geo locations.
+1. **Persistent and Isolated Message Storage:** Pulsar decouples serving and storage tiers. Pulsar uses Apache Bookkeeper as message-store
 
 
 ### Apache Pulsar - Flink Connector
@@ -38,9 +38,9 @@ date: 2019-07-07
 
 <p>Pulsar - Flink Batch API currently supports the following output formats:</p>
 
-1. **PulsarOutputFormat:** Writes Flink DataSet rows as messages in plain text to Pulsar \ 
-1. **PulsarCsvOutputFormat:** Writes Flink DataSet rows as messages in Csv format to Pulsar \
-1. **PulsarJsonOutputFormat:** Writes Flink DataSet rows as messages in Json format to Pulsar \
+1. **PulsarOutputFormat:** Writes Flink DataSet rows as messages in plain text to Pulsar
+1. **PulsarCsvOutputFormat:** Writes Flink DataSet rows as messages in Csv format to Pulsar
+1. **PulsarJsonOutputFormat:** Writes Flink DataSet rows as messages in Json format to Pulsar
 1. **PulsarAvroOutputFormat:** Writes Flink DataSet rows as messages in Avro format to Pulsar
 
 Lets have a look example:
@@ -150,6 +150,6 @@ $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ```
 
 ### References
-1. [Apache Flink](https://flink.apache.org/) \
-1. [Apache Pulsar](https://pulsar.apache.org/) \
+1. [Apache Flink](https://flink.apache.org/)
+1. [Apache Pulsar](https://pulsar.apache.org/)
 1. [Apache Bookkeeper](https://bookkeeper.apache.org/)
