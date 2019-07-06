@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Apache Pulsar Flink Connector"
+category: Dev
+tags: [apache pulsar, apache flink, connector, streaming, batch processing, pub-sub system, distributed systems]
+date: 2019-07-07
+---
+
 <p>This article aims to show how to write Apache Flink DataSets to Apache Pulsar topic from scratch. Both Apache Flink and Pulsar projects are main components of Data Pipelines. Let' s have a quick look Apache Flink and Apache Pulsar.</p>
 
 ### Apache Flink
@@ -142,6 +150,6 @@ $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ```
 
 ### References
-[Apache Flink](https://flink.apache.org/) \
-[Apache Pulsar](https://pulsar.apache.org/) \
-[Apache Bookkeeper](https://bookkeeper.apache.org/)
+1. [Apache Flink](https://flink.apache.org/) \
+1. [Apache Pulsar](https://pulsar.apache.org/) \
+1. [Apache Bookkeeper](https://bookkeeper.apache.org/)
