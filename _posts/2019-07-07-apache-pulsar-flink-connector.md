@@ -30,9 +30,9 @@
 
 <p>Pulsar - Flink Batch API currently supports the following output formats:</p>
 
-1. `PulsarOutputFormat`: Writes Flink DataSet rows as messages in plain text to Pulsar
-1. `PulsarCsvOutputFormat`: Writes Flink DataSet rows as messages in Csv format to Pulsar
-1. `PulsarJsonOutputFormat`: Writes Flink DataSet rows as messages in Json format to Pulsar
+1. `PulsarOutputFormat`: Writes Flink DataSet rows as messages in plain text to Pulsar \ 
+1. `PulsarCsvOutputFormat`: Writes Flink DataSet rows as messages in Csv format to Pulsar \
+1. `PulsarJsonOutputFormat`: Writes Flink DataSet rows as messages in Json format to Pulsar \
 1. `PulsarAvroOutputFormat`: Writes Flink DataSet rows as messages in Avro format to Pulsar
 
 Lets have a look example:
