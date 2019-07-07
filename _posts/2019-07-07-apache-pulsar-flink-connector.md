@@ -57,18 +57,18 @@ Lets have a look example:
 1. Apache Flink: v1.8
 1. Apache Pulsar: v2.3.2
 
-1- Apache Pulsar can be downloaded at [here](https://pulsar.apache.org/en/download/)
+**1-** Apache Pulsar can be downloaded at [here](https://pulsar.apache.org/en/download/)
 ```yaml
 $ tar xvfz apache-pulsar-2.3.2-bin.tar.gz
 $ cd apache-pulsar-2.3.2
 ```
 
-2- We need to run Pulsar in standalone mode (locally) to simplify the example:
+**2-** We need to run Pulsar in standalone mode (locally) to simplify the example:
 ```yaml
 $ bin/pulsar standalone
 ```
 
-3- Object model needs to be defined before creating Dataset:
+**3-** Object model needs to be defined before creating Dataset:
 ```scala
 /**
   * NasaMission Model
@@ -77,13 +77,13 @@ case class NasaMission(id: Int, missionName: String, startYear: Int, endYear: In
   extends Tuple4(id, missionName, startYear, endYear)
 ```
 
-4- Each Flink program needs to have `ExecutionEnvironment` defining application context. It provides the functions to control Flink job execution.
+**4-** Each Flink program needs to have `ExecutionEnvironment` defining application context. It provides the functions to control Flink job execution.
 ```scala
 // set up the execution environment
 val env = ExecutionEnvironment.getExecutionEnvironment
 ```
 
-5- `PulsarCsvOutputFormat` needs to be defined by setting Pulsar `Service URL`(e.g: pulsar://127.0.0.1:6650) and `Topic Name` in order to write Flink Datasets to Pulsar topic.
+**5-** `PulsarCsvOutputFormat` needs to be defined by setting Pulsar `Service URL`(e.g: pulsar://127.0.0.1:6650) and `Topic Name` in order to write Flink Datasets to Pulsar topic.
 ```scala
 private val SERVICE_URL = "pulsar://127.0.0.1:6650"
 private val TOPIC_NAME = "my-flink-topic"
@@ -92,7 +92,7 @@ private val TOPIC_NAME = "my-flink-topic"
 val pulsarCsvOutputFormat = new PulsarCsvOutputFormat[NasaMission](SERVICE_URL, TOPIC_NAME)
 ```
 
-6- In this sample, Nasa Missions' data have been used to create sample dataset.
+**6-** In this sample, Nasa Missions' data have been used to create sample dataset.
 ```scala
 private val nasaMissions = List(
     NasaMission(1, "Mercury program", 1959, 1963),
@@ -105,7 +105,7 @@ private val nasaMissions = List(
 val nasaMissionsDS = env.fromCollection(nasaMissions)
 ```
 
-7- This step aims to be processed `nasaMissionsDS` dataset by applying easy `map-filter` operations.
+**7-** This step aims to be processed `nasaMissionsDS` dataset by applying easy `map-filter` operations.
 ```scala
 // map nasa mission names to upper-case
 nasaMissionsDS.map(nasaMission => NasaMission(
@@ -118,13 +118,13 @@ nasaMissionsDS.map(nasaMission => NasaMission(
 .filter(_.startYear > 1970)
 ```
 
-8- After dataset is processed, it can be written to Pulsar on user defined topic.
+**8-** After dataset is processed, it can be written to Pulsar on user defined topic.
 ```scala
 // write batch data to Pulsar as Csv
 .output(pulsarCsvOutputFormat)
 ```
 
-9- Parallelism level can be defined to write dataset to Pulsar in parallel. However, dataset order can be changed.
+**9-** Parallelism level can be defined to write dataset to Pulsar in parallel. However, dataset order can be changed.
 ```scala
 // set parallelism to write Pulsar in parallel (optional)
 env.setParallelism(2)
@@ -133,16 +133,16 @@ env.setParallelism(2)
 env.execute("Flink - Pulsar Batch Csv Example")
 ```
 
-10- Please see the complete example as follows:
+**10-** Please see the complete example as follows:
 [here](https://github.com/apache/pulsar/tree/master/examples/flink/src/main/scala/org/apache/flink/batch/connectors/pulsar/example/FlinkPulsarBatchCsvSinkScalaExample.scala)
 
-11- Also, for verification, written messages can be tailed through terminal as follows. Otherwise, Pulsar Consumer(e.g: Java based) can be enabled.
-```
+**11-** Also, for verification, written messages can be tailed through terminal as follows. Otherwise, Pulsar Consumer(e.g: Java based) can be enabled.
+```yaml
 $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ```
 
-12- Please find the expected results as follows:
-```dtd
+**12-** Please find the expected results as follows:
+```yaml
 ----- got message -----
 4,SKYLAB,1973,1974
 ----- got message -----
