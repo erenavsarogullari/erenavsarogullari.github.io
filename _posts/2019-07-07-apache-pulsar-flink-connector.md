@@ -9,7 +9,7 @@ date: 2019-07-07
 <p>This article aims to show how to write Apache Flink DataSets to Apache Pulsar topic from scratch. Both Flink and Pulsar projects are main components of Data Pipelines. Let' s have a look Flink and Pulsar.</p>
 
 ### Apache Flink
-<p>Apache Flink is an open-source unified distributed compute engine by supporting Streaming, Batch, ML and Graph Processing use cases.</p>
+<p>Apache Flink is an open-source unified distributed compute engine by supporting Streaming, Batch, ML and Graph Processing use cases. Project moved to Apache Software Foundation(ASF) as incubator in 2014 and graduated from incubator stage as top-level Apache project in same year.</p>
 
 <p>Flink’s some of the key features are as follows:</p>
 
