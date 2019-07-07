@@ -146,7 +146,7 @@ $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ----- got message -----
 4,SKYLAB,1973,1974
 ----- got message -----
-5,APOLLO–SOYUZ TEST PROJECT,1975,1975
+5,APOLLO–SOYUZ TEST PROJECT,1975,19
 ```
 
 ### References
