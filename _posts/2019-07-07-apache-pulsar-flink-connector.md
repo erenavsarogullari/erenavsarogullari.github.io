@@ -137,12 +137,12 @@ env.execute("Flink - Pulsar Batch Csv Example")
 [here](https://github.com/apache/pulsar/tree/master/examples/flink/src/main/scala/org/apache/flink/batch/connectors/pulsar/example/FlinkPulsarBatchCsvSinkScalaExample.scala)
 
 11- Also, for verification, written messages can be tailed through terminal as follows. Otherwise, Pulsar Consumer(e.g: Java based) can be enabled.
-```dockerfile
+```
 $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ```
 
 12- Please find the expected results as follows:
-```dockerfile
+```
 ----- got message -----
 4,SKYLAB,1973,1974
 ----- got message -----
