@@ -6,7 +6,7 @@ tags: [apache pulsar, apache flink, connector, stream processing, batch processi
 date: 2019-07-07
 ---
 
-<p>This article aims to show how to write Apache Flink DataSets to Apache Pulsar topic from scratch. Both Flink and Pulsar projects are main components of Data Pipelines. Let' s have a look Flink and Pulsar.</p>
+<p>This article aims to show how to write Apache Flink DataSets to Apache Pulsar topic from scratch. Both Flink and Pulsar projects are main layers of Data Pipelines for data processing and message store & transmission tiers . Let' s have a look Flink and Pulsar.</p>
 
 ### Apache Flink
 <p>Apache Flink is an open-source unified distributed compute engine by supporting Streaming, Batch, ML and Graph Processing use cases. Project moved to Apache Software Foundation(ASF) as incubator in 2014 and graduated from incubator stage as top-level Apache project in same year.</p>
@@ -27,9 +27,9 @@ date: 2019-07-07
 1. **Multi Tenancy:** Multiple services can be supported by same Pulsar cluster through separated authentication and authorization isolation.
 1. **Streaming and Queueing Support:** Pulsar supports traditional Queueuing and Streaming use-case by enabling different subscription mode: such as **exclusive**, **shared** or **failover**.
 1. **Pulsar Functions:** Serverless based computing framework by providing stream-native data processing.
-1. **Pulsar I/O:** Connector framework built on top of Pulsar Functions by moving data in and out through ecosystem.
+1. **Pulsar I/O:** Connector framework has been built on top of Pulsar Functions by moving data in and out through ecosystem.
 1. **Geo Replication:** This feature provides sync/async message replication between clusters located in different geo locations.
-1. **Persistent and Isolated Message Storage:** Pulsar decouples serving and storage tiers. Pulsar uses Apache Bookkeeper as message-store.
+1. **Persistent and Isolated Message Storage:** Pulsar decouples serving and storage tiers. Also, it uses [Apache Bookkeeper](https://bookkeeper.apache.org/) as message-store.
 
 
 ### Apache Pulsar - Flink Connector
@@ -152,6 +152,5 @@ $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ### References
 1. [Apache Pulsar](https://pulsar.apache.org/)
 1. [Apache Flink](https://flink.apache.org/)
-1. [Apache Bookkeeper](https://bookkeeper.apache.org/)
 1. [Exactly Once Stream Processing with Apache Flink](https://www.ververica.com/blog/high-throughput-low-latency-and-exactly-once-stream-processing-with-apache-flink)
 1. [Exactly and Effectively-Once Processing Semantics](https://streaml.io/blog/exactly-once)
