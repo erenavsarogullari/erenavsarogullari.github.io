@@ -58,14 +58,14 @@ Spring and Spring Integration Frameworks’ Dependencies are as follows :
         <version>${spring.integration.version}</version>
         <scope>compile</scope>
     </dependency>
-<dependencies>
+</dependencies>
 ```
 
 **STEP 2 : rabbitmq.config**
 
 First RabbitMQ Server’ s config file(rabbitmq.config) is as follows. It should be put under ../rabbitmq_server-version/etc/rabbitmq/
 
-```
+```yaml
 [
  {rabbit, [ {tcp_listeners, [5672]},
  {collect_statistics_interval, 10000},
@@ -81,7 +81,7 @@ First RabbitMQ Server’ s config file(rabbitmq.config) is as follows. It should
 
 Second RabbitMQ Server’ s rabbitmq.config file :
 
-```
+```yaml
 [
  {rabbit, [ {tcp_listeners, [5673]},
  {collect_statistics_interval, 10000},
@@ -149,7 +149,7 @@ Spring Integration Context is created as follows. Order Lists are sent to Order 
 
 rabbitmq.properties is created as follows. If first RabbitMQ server is shut down accidentally, Second RabbitMQ will continue to listen the Order messages.
 
-```
+```yaml
 rabbitmq.addresses=localhost:5672,localhost:5673
 rabbitmq.username=guest
 rabbitmq.password=guest
@@ -189,11 +189,8 @@ OrderGateway Interface provides an application access to the Order messaging sys
 
 ```java
 import java.util.List;
-
 import org.springframework.messaging.Message;
-
 import com.onlinetechvision.model.Order;
-
 
 public interface OrderGateway {
 
@@ -212,12 +209,9 @@ OrderSplitter listens inputChannel and breaks incoming Order List into Order mes
 
 ```java
 import java.util.List;
-
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
-
 import com.onlinetechvision.model.Order;
-
 
 @Component("orderSplitter")
 public class OrderSplitter {
@@ -241,7 +235,6 @@ Generic Process Service Interface exposes process service functionality to messa
 ```java
 import org.springframework.messaging.Message;
 
-
 public interface ProcessService<T> {
 
     /**
@@ -263,9 +256,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
-
 import com.onlinetechvision.model.Order;
-
 
 @Component("orderProcessService")
 public class OrderProcessService implements ProcessService<Order> {
@@ -296,15 +287,12 @@ First Messaging Node’ s Application Class :
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
-
 import com.onlinetechvision.integration.OrderGateway;
 import com.onlinetechvision.model.Order;
-
 
 public class Application {
 
@@ -364,7 +352,6 @@ Second Messaging Node’ s Application Class :
 ```java
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
 public class Application {
   
   /**
@@ -384,7 +371,7 @@ public class Application {
 
 First RabbitMQ Server’ s sample bash script is as follows. Also please have a look RabbitMQ Cluster documentation for other configuration steps.
 
-```
+```yaml
 #!/bin/bash
 echo "*** First RabbitMQ Server is setting up ***"
 
@@ -406,7 +393,7 @@ echo "*** First RabbitMQ Server' s status : ***"
 
 Second RabbitMQ Server’ s sample bash script is as follows :
 
-```
+```yaml
 #!/bin/bash
 echo "*** Second RabbitMQ Server is setting up ***"
 
@@ -482,7 +469,7 @@ The following console output logs will be seen as well :
 
 First Messaging Node Console :
 
-```
+```yaml
 ...
 
 22:32:51.838 [SimpleAsyncTaskExecutor-1] DEBUG c.o.p.s.OrderProcessService - Node 1 - Received Message : Order [id=260, name=Sample_Order_260]
@@ -495,7 +482,7 @@ After Message id : 264 is delivered to First Messaging Node, it and First Rabbit
 
 Second Messaging Node Console :
 
-```
+```yaml
 ...
 
 22:32:54.211 [SimpleAsyncTaskExecutor-1] DEBUG c.o.p.s.OrderProcessService - Node 2 - Received Message : Order [id=262, name=Sample_Order_262]
