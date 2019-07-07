@@ -23,13 +23,13 @@ date: 2019-07-07
 
 <p>Pulsar’s some of the key features are as follows:</p>
 
-1. **Multi Language Support:** Currently, simple client APIs support such as Java, Python, C++
+1. **Multi Language Support:** Currently, simple client APIs support such as **Java**, **Go**, **Python** and **C++**.
 1. **Multi Tenancy:** Multiple services can be supported by same Pulsar cluster through separated authentication and authorization isolation.
-1. **Streaming and Queueing Support:** Pulsar supports traditional Queueuing and Streaming use-case by supporting different subscription mode: such as exclusive, shared or failover
+1. **Streaming and Queueing Support:** Pulsar supports traditional Queueuing and Streaming use-case by enabling different subscription mode: such as **exclusive**, **shared** or **failover**.
 1. **Pulsar Functions:** Serverless based computing framework by providing stream-native data processing.
 1. **Pulsar I/O:** Connector framework built on top of Pulsar Functions by moving data in and out through ecosystem.
 1. **Geo Replication:** This feature provides sync/async message replication between clusters located in different geo locations.
-1. **Persistent and Isolated Message Storage:** Pulsar decouples serving and storage tiers. Pulsar uses Apache Bookkeeper as message-store
+1. **Persistent and Isolated Message Storage:** Pulsar decouples serving and storage tiers. Pulsar uses Apache Bookkeeper as message-store.
 
 
 ### Apache Pulsar - Flink Connector
