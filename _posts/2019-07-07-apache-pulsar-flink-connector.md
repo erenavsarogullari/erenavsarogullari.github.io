@@ -142,7 +142,7 @@ $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ```
 
 12- Please find the expected results as follows:
-```
+```dtd
 ----- got message -----
 4,SKYLAB,1973,1974
 ----- got message -----
