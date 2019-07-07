@@ -58,7 +58,7 @@ Lets have a look example:
 1. Apache Pulsar: v2.3.2
 
 1- Apache Pulsar can be downloaded at [here](https://pulsar.apache.org/en/download/)
-```shell
+```yaml
 $ tar xvfz apache-pulsar-2.3.2-bin.tar.gz
 $ cd apache-pulsar-2.3.2
 ```
@@ -142,7 +142,7 @@ $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ```
 
 12- Please find the expected results as follows:
-```html
+```yaml
 ----- got message -----
 4,SKYLAB,1973,1974
 ----- got message -----
