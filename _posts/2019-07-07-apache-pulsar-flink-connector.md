@@ -2,7 +2,7 @@
 layout: post
 title: "Apache Pulsar Flink Connector"
 category: Dev
-tags: [apache pulsar, apache flink, connector, streaming, batch processing, pub-sub system, distributed systems]
+tags: [apache pulsar, apache flink, connector, stream processing, batch processing, pub-sub system, distributed systems]
 date: 2019-07-07
 ---
 
@@ -44,9 +44,9 @@ date: 2019-07-07
 
 Lets have a look example:
 
-<p>In this example Scala has been used. However, both Java and Scala examples can also be found under Apache Pulsar Repo as follows:</p>
+<p>In this example Scala has been used. However, both Java and Scala examples can also be found under Pulsar Repo as follows:</p>
 
-[Java Examples](https://github.com/apache/pulsar/tree/master/examples/flink/src/main/java/org/apache/flink/batch/connectors/pulsar/example/) \
+[Java Examples](https://github.com/apache/pulsar/tree/master/examples/flink/src/main/java/org/apache/flink/batch/connectors/pulsar/example/) <br/>
 [Scala Examples](https://github.com/apache/pulsar/tree/master/examples/flink/src/main/scala/org/apache/flink/batch/connectors/pulsar/example/)
 
 <p>In this example project, we will be creating Flink NasaMission Dataset and writing each row to Pulsar as separated message in Csv format. Lets start:</p>
@@ -137,12 +137,12 @@ env.execute("Flink - Pulsar Batch Csv Example")
 [here](https://github.com/apache/pulsar/tree/master/examples/flink/src/main/scala/org/apache/flink/batch/connectors/pulsar/example/FlinkPulsarBatchCsvSinkScalaExample.scala)
 
 11- Also, for verification, written messages can be tailed through terminal as follows. Otherwise, Pulsar Consumer(e.g: Java based) can be enabled.
-```yaml
+```dockerfile
 $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ```
 
 12- Please find the expected results as follows:
-```yaml
+```dockerfile
 ----- got message -----
 4,SKYLAB,1973,1974
 ----- got message -----
@@ -150,8 +150,8 @@ $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 ```
 
 ### References
-1. [Apache Flink](https://flink.apache.org/)
 1. [Apache Pulsar](https://pulsar.apache.org/)
+1. [Apache Flink](https://flink.apache.org/)
 1. [Apache Bookkeeper](https://bookkeeper.apache.org/)
 1. [Exactly Once Stream Processing with Apache Flink](https://www.ververica.com/blog/high-throughput-low-latency-and-exactly-once-stream-processing-with-apache-flink)
 1. [Exactly and Effectively-Once Processing Semantics](https://streaml.io/blog/exactly-once)
