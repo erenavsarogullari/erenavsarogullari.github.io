@@ -6,18 +6,17 @@ tags: [apache pulsar, apache flink, connector, streaming, batch processing, pub-
 date: 2019-07-07
 ---
 
-<p>This article aims to show how to write Apache Flink DataSets to Apache Pulsar topic from scratch. Both Apache Flink and Pulsar projects are main components of Data Pipelines. Let' s have a quick look Apache Flink and Apache Pulsar.</p>
+<p>This article aims to show how to write Apache Flink DataSets to Apache Pulsar topic from scratch. Both Flink and Pulsar projects are main components of Data Pipelines. Let' s have a look Flink and Pulsar.</p>
 
 ### Apache Flink
 <p>Apache Flink is an open-source unified distributed compute engine by supporting Streaming, Batch, ML and Graph Processing use cases.</p>
 
 <p>Flink’s some of the key features are as follows:</p>
 
-1. **Stateful Stream Processing:**
-1. **Complex Event Processing:**
-1. **Batch Processing:**
-1. **ML:**
-1. **Graph Processing:**
+1. **Stateless & Stateful Stream Processing:** Stream Processing focuses unbounded data processing by supporting different window types such as: time, count, session etc. Data needs to be processed when it is arrived. For state view, stream processing can be classified as stateless and stateful. Stateless Stream Processing means that there is no dependency between current event and previous events so each incoming event will be processed directly without keeping state. However, stateful stream processing means that there is shared state between current event and previous events so each incoming event so past events will influence to be processed current events in the light of current state. Flink exposes **DataStream API** for Stream processing.
+1. **Batch Processing:** Data is bounded and has start and end time at Batch Processing. It is one of use case. Flink exposes **DataSet API** for Batch processing.
+1. **Complex Event Processing:** Pattern Detection is one of the key challenge in Stream Processing. Flink exposes Complex Event Processing(CEP) API to be detected patterns on current stream. Anomaly and Fraud Detection can be thought as some of the potential use-cases for CEP API.
+1. **Exactly-Once Delivery Semantics:** Incoming event will affect final state at once even if failures occurs.
 
 ### Apache Pulsar
 <p>Apache Pulsar is open-source distributed pub/sub messaging system. It has been created by Yahoo originally and moved to Apache Software Foundation(ASF) as incubator in 2016. Graduated from incubator stage as top-level Apache project in 2018.</p>
@@ -154,3 +153,5 @@ $ bin/pulsar-client consume -n 0 -s test my-flink-topic
 1. [Apache Flink](https://flink.apache.org/)
 1. [Apache Pulsar](https://pulsar.apache.org/)
 1. [Apache Bookkeeper](https://bookkeeper.apache.org/)
+1. [Exactly Once Stream Processing with Apache Flink](https://www.ververica.com/blog/high-throughput-low-latency-and-exactly-once-stream-processing-with-apache-flink)
+1. [Exactly and Effectively-Once Processing Semantics](https://streaml.io/blog/exactly-once)
