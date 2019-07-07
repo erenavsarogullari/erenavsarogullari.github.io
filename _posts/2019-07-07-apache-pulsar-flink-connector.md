@@ -64,7 +64,7 @@ $ cd apache-pulsar-2.3.2
 ```
 
 2- We need to run Pulsar in standalone mode (locally) to simplify the example:
-```shell
+```yaml
 $ bin/pulsar standalone
 ```
 
