@@ -9,7 +9,7 @@ JDK v1.8
 Scala v2.13
 Akka v2.5.23
 
-1- We can define 2 Actor Systems. One of them(`app-actor-system`) is used for service' s computation layer and other one(`app-health-actor-system`) is used for service' s dependency health checks(e.g: service itself or its dependencies(Database, Zookeeper etc...) are Up/Down):
+**1-** We can define 2 Actor Systems. One of them(`app-actor-system`) is used for service' s computation layer and other one(`app-health-actor-system`) is used for service' s dependency health checks(e.g: service itself or its dependencies(Database, Zookeeper etc...) are Up/Down):
 ```scala
 package io.github.erenavsarogullari.actorsystem.health.check.utils
 
@@ -32,7 +32,7 @@ object AkkaUtils {
 }
 ```
 
-2- `HeartbeatActor` running on `app-actor-system` can be defined. This actor will be used to decide if `app-actor-system` is alive or not:
+**2-** `HeartbeatActor` running on `app-actor-system` can be defined. This actor will be used to decide if `app-actor-system` is alive or not:
 ```scala
 package io.github.erenavsarogullari.actorsystem.health.check.actor
 
@@ -54,7 +54,7 @@ class HeartbeatActor extends Actor {
 }
 ```
 
-3- `StackOverflowErrorActor` running on `app-actor-system` can be defined. This actor will be used to simulate fatal-error case on `app-actor-system` by waiting `TriggerStackOverflowError` message:
+**3-** `StackOverflowErrorActor` running on `app-actor-system` can be defined. This actor will be used to simulate fatal-error case on `app-actor-system` by waiting `TriggerStackOverflowError` message:
 ```scala
 package io.github.erenavsarogullari.actorsystem.health.check.actor
 
@@ -73,7 +73,7 @@ class StackOverflowErrorActor extends Actor {
 }
 ```
 
-4- `HealthStatusType` defines `app-actor-system`' s potential statuses:
+**4-** `HealthStatusType` defines `app-actor-system`' s potential statuses:
 ```scala
 package io.github.erenavsarogullari.actorsystem.health.check.status
 
@@ -85,7 +85,7 @@ object HealthStatusType extends Enumeration {
 }
 ```
 
-5- `ActorSystemHealthChecker` checks `app-actor-system` status by sending `HeartbeatRequest` to `HeartbeatActor` and expects `HeartbeatResponse` in timeout (5 secs). If it gets consecutive `akka.pattern.AskTimeoutException` in `FailureThreshold` (3 times), it will set `app-actor-system` status as DOWN, otherwise UP or UNKNOWN.
+**5-** `ActorSystemHealthChecker` checks `app-actor-system` status by sending `HeartbeatRequest` to `HeartbeatActor` and expects `HeartbeatResponse` in timeout (5 secs). If it gets consecutive `akka.pattern.AskTimeoutException` in `FailureThreshold` (3 times), it will set `app-actor-system` status as DOWN, otherwise UP or UNKNOWN.
 ```scala
 package io.github.erenavsarogullari.actorsystem.health.check
 
@@ -153,7 +153,7 @@ class ActorSystemHealthChecker(heartbeatActorRef: ActorRef)(implicit ec: Executi
 
 ```
 
-6- `ActorSystemHealthApp` is defined to run the sample application. It initializes `ActorSystemHealthChecker` and schedules `ActorSystemCheckRunnable` and `ErrorOnActorSystemRunnable`.
+**6-** `ActorSystemHealthApp` is defined to run the sample application. It initializes `ActorSystemHealthChecker` and schedules `ActorSystemCheckRunnable` and `ErrorOnActorSystemRunnable`.
 ```scala
 package io.github.erenavsarogullari.actorsystem.health.check
 
@@ -205,7 +205,7 @@ If a fatal-error occurs on an actor, its ActorSystem will be shut down as defaul
 it may also get down and this can also cause for all other nodes. To avoid for these kind of cases and keep problem scope limited (specially, multi-tenanted environment), `jvm-exit-on-fatal-error` property can be set as `off`. 
 In this case, ActorSystem will be shut down but jvm will not be exited.
 
-7- `akka.jvm-exit-on-fatal-error` property can be set as `off` because preventing to spread the problem(e.g: Fatal Errors => Stackoverflow, OOM Errors) to the other service instances.
+**7-** `akka.jvm-exit-on-fatal-error` property can be set as `off` because preventing to spread the problem(e.g: Fatal Errors => Stackoverflow, OOM Errors) to the other service instances.
 ```yaml
 akka {
 
@@ -225,7 +225,7 @@ private def setConfig(): Unit = {
 }
 ```
 
-8- Please find the application trace as follows:
+**8-** Please find the application trace as follows:
 ```yaml
 INFO ActorSystemHealthChecker - app-actor-system Heartbeat Call is successful
 INFO ActorSystemHealthApp$ - app-actor-system is UP
@@ -262,6 +262,8 @@ INFO ActorSystemHealthApp$ - app-actor-system is DOWN
 WARN ActorSystemHealthChecker - app-actor-system Heartbeat Call is failed. 
 INFO ActorSystemHealthApp$ - app-actor-system is DOWN
 ```
+**9-** Please see the complete example as follows:
+[here](https://github.com/erenavsarogullari/blog-posts/tree/master/actorsystem-health-check)
 
 ### References
 [Akka](https://doc.akka.io/docs/akka/current/index.html) \
