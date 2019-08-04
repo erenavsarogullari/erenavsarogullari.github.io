@@ -1,30 +1,15 @@
-Most of the prod application can have multiple internal and external dependencies and their readiness & liveness status are important for service quality and SLA. 
+Most of the prod application can have multiple internal and external dependencies and their readiness & liveness statuses are important for service quality and SLA. 
 
 When Akka Actor pattern is used, ActorSystem will also be one of these dependencies and its lifecycle will also need to be checked as the other dependencies.
 
-For example: if a fatal-error occurs on an actor, its ActorSystem will be shut down, and then all actors managed by this ActorSystem will be stopped as well. In this case:
-1- As the first-step, RCA of fatal-error will need to be done and proper fix should be applied asap. If requires some time, workaround patch can be useful as short-term and proper fix can be planned for long-term. \
-2- Akka supports `akka.jvm-exit-on-fatal-error` property. This can be set on (default)/off (depends on the case). However, when fatal-error occurs, jvm will exit. However, if same operation is applied to next service instance, 
-it may also get down and this can also cause for all other nodes. To avoid for these kind of cases and keep problem scope limited (specially, multi-tenanted environment), `jvm-exit-on-fatal-error` can be set as `off`. 
-In this case, ActorSystem will be shut down but jvm will still alive.
-
-This article aims to show how to define an Actor System Health Check. Let' s have a look for sample Actor System Health Check implementation as follows:
+This article aims to show how to define an Actor System Health Check to track its health status at runtime. Let' s have a look for sample Actor System Health Check implementation as follows:
 
 Setup:
 JDK v1.8
 Scala v2.13
 Akka v2.5.23
 
-1- `akka.jvm-exit-on-fatal-error` property can be set as `off` because preventing to spread the problem(e.g: Fatal Errors => Stackoverflow, OOM Errors) to the other service instances
-```
-akka {
-
-  jvm-exit-on-fatal-error=off
-
-}
-```
-
-2- We can define 2 Actor Systems. One of them(`app-actor-system`) is used for service' s computation layer and other one(`app-health-actor-system`) is used for service' s dependency health checks(e.g: service itself or its dependencies(Database, Zookeeper etc...) are Up/Down):
+1- We can define 2 Actor Systems. One of them(`app-actor-system`) is used for service' s computation layer and other one(`app-health-actor-system`) is used for service' s dependency health checks(e.g: service itself or its dependencies(Database, Zookeeper etc...) are Up/Down):
 ```
 package io.github.erenavsarogullari.actorsystem.health.check.utils
 
@@ -47,7 +32,7 @@ object AkkaUtils {
 }
 ```
 
-3- `HeartbeatActor` running on `app-actor-system` can be defined. This actor will be used to decide if `app-actor-system` is alive or not:
+2- `HeartbeatActor` running on `app-actor-system` can be defined. This actor will be used to decide if `app-actor-system` is alive or not:
 ```
 package io.github.erenavsarogullari.actorsystem.health.check.actor
 
@@ -69,7 +54,7 @@ class HeartbeatActor extends Actor {
 }
 ```
 
-4- `StackOverflowErrorActor` running on `app-actor-system` can be defined. This actor will be used to simulate fatal-error case on `app-actor-system` by waiting `TriggerStackOverflowError` message:
+3- `StackOverflowErrorActor` running on `app-actor-system` can be defined. This actor will be used to simulate fatal-error case on `app-actor-system` by waiting `TriggerStackOverflowError` message:
 ```
 package io.github.erenavsarogullari.actorsystem.health.check.actor
 
@@ -88,7 +73,7 @@ class StackOverflowErrorActor extends Actor {
 }
 ```
 
-5- `HealthStatusType` defines `app-actor-system`' s potential statuses:
+4- `HealthStatusType` defines `app-actor-system`' s potential statuses:
 ```
 package io.github.erenavsarogullari.actorsystem.health.check.status
 
@@ -100,7 +85,7 @@ object HealthStatusType extends Enumeration {
 }
 ```
 
-6- `ActorSystemHealthChecker` checks `app-actor-system` status by sending `HeartbeatRequest` to `HeartbeatActor` and expects `HeartbeatResponse` in timeout (5 secs). If it gets consecutive `akka.pattern.AskTimeoutException` in `FailureThreshold` (3 times), it will set `app-actor-system` status as DOWN, otherwise UP or UNKNOWN.
+5- `ActorSystemHealthChecker` checks `app-actor-system` status by sending `HeartbeatRequest` to `HeartbeatActor` and expects `HeartbeatResponse` in timeout (5 secs). If it gets consecutive `akka.pattern.AskTimeoutException` in `FailureThreshold` (3 times), it will set `app-actor-system` status as DOWN, otherwise UP or UNKNOWN.
 ```
 package io.github.erenavsarogullari.actorsystem.health.check
 
@@ -168,7 +153,7 @@ class ActorSystemHealthChecker(heartbeatActorRef: ActorRef)(implicit ec: Executi
 
 ```
 
-7- `ActorSystemHealthApp` is defined to run the sample application. It initializes `ActorSystemHealthChecker` and schedules `ActorSystemCheckRunnable` and `ErrorOnActorSystemRunnable`.
+6- `ActorSystemHealthApp` is defined to run the sample application. It initializes `ActorSystemHealthChecker` and schedules `ActorSystemCheckRunnable` and `ErrorOnActorSystemRunnable`.
 ```
 package io.github.erenavsarogullari.actorsystem.health.check
 
@@ -219,6 +204,23 @@ object ActorSystemHealthApp {
     override def run(): Unit = stackOverflowErrorActorRef ! TriggerStackOverflowError
 
   }
+
+}
+```
+
+For example: we can wonder what happens when fatal-error(e.g: `StackOverflowError`) occurs on an actor and jvm should not be exited?
+
+If a fatal-error occurs on an actor, its ActorSystem will be shut down as default, and then all actors managed by this ActorSystem will be stopped as well. In this case:
+1- As the first-step, Root-Cause-Analysis (RCA) of fatal-error will need to be done and proper fix should be applied asap. \
+2- Akka supports `akka.jvm-exit-on-fatal-error` property. This can be set on (default)/off (depends on the case). However, when fatal-error occurs, jvm will exit. This behaviour can prefer most of the use-case. However, there may still be some use case to disable this such as if same operation is applied to next service instance, 
+it may also get down and this can also cause for all other nodes. To avoid for these kind of cases and keep problem scope limited (specially, multi-tenanted environment), `jvm-exit-on-fatal-error` property can be set as `off`. 
+In this case, ActorSystem will be shut down but jvm will not be exited.
+
+7- `akka.jvm-exit-on-fatal-error` property can be set as `off` because preventing to spread the problem(e.g: Fatal Errors => Stackoverflow, OOM Errors) to the other service instances.
+```
+akka {
+
+  jvm-exit-on-fatal-error=off
 
 }
 ```
