@@ -170,23 +170,12 @@ object ActorSystemHealthApp {
   private val logger = LoggerFactory.getLogger(ActorSystemHealthApp.getClass)
 
   def main(args: Array[String]): Unit = {
-    setConfig()
-
     val actorSystemHealthChecker = ActorSystemHealthChecker(AkkaUtils.heartbeatActorRef)(AkkaUtils.appHealthEC)
     val actorSystemCheckRunnable = new ActorSystemCheckRunnable(actorSystemHealthChecker)
     AkkaUtils.appHealthActorSystem.scheduler.schedule(0 seconds, 10 seconds, actorSystemCheckRunnable)(AkkaUtils.appHealthEC)
 
     val errorOnActorSystemRunnable = new ErrorOnActorSystemRunnable(AkkaUtils.stackOverflowErrorActorRef)
     AkkaUtils.appActorSystem.scheduler.scheduleOnce(25 seconds, errorOnActorSystemRunnable)(AkkaUtils.appEC)
-  }
-
-  private def setConfig(): Unit = {
-    import com.typesafe.config.Config
-    import com.typesafe.config.ConfigFactory
-
-    System.setProperty("akka.jvm-exit-on-fatal-error", "off")
-    val conf: Config = ConfigFactory.load()
-    require(conf.getString("akka.jvm-exit-on-fatal-error") == "off", "akka.jvm-exit-on-fatal-error should be off")
   }
 
   private class ActorSystemCheckRunnable(actorSystemHealthChecker: ActorSystemHealthChecker) extends Runnable {
@@ -222,6 +211,17 @@ akka {
 
   jvm-exit-on-fatal-error=off
 
+}
+```
+or this can set programitacally as follows:
+```
+private def setConfig(): Unit = {
+    import com.typesafe.config.Config
+    import com.typesafe.config.ConfigFactory
+
+    System.setProperty("akka.jvm-exit-on-fatal-error", "off")
+    val conf: Config = ConfigFactory.load()
+    require(conf.getString("akka.jvm-exit-on-fatal-error") == "off", "akka.jvm-exit-on-fatal-error should be off")
 }
 ```
 
