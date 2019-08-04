@@ -206,14 +206,14 @@ it may also get down and this can also cause for all other nodes. To avoid for t
 In this case, ActorSystem will be shut down but jvm will not be exited.
 
 7- `akka.jvm-exit-on-fatal-error` property can be set as `off` because preventing to spread the problem(e.g: Fatal Errors => Stackoverflow, OOM Errors) to the other service instances.
-```text
+```yaml
 akka {
 
   jvm-exit-on-fatal-error=off
 
 }
 ```
-or this can set programitacally as follows:
+or this can set programmatically as follows:
 ```scala
 private def setConfig(): Unit = {
     import com.typesafe.config.Config
@@ -226,7 +226,7 @@ private def setConfig(): Unit = {
 ```
 
 8- Please find the application trace as follows:
-```text
+```yaml
 INFO ActorSystemHealthChecker - app-actor-system Heartbeat Call is successful
 INFO ActorSystemHealthApp$ - app-actor-system is UP
 INFO ActorSystemHealthChecker - app-actor-system Heartbeat Call is successful
